@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="ScipBe.Common.Office.OneNoteProvider">
+    <Position X="3.75" Y="0.5" Width="2" />
+    <AssociationLine Name="NotebookItems" Type="ScipBe.Common.Office.IOneNoteExtNotebook" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.75" Y="1.6" />
+        <Point X="0.932" Y="1.6" />
+        <Point X="0.932" Y="5" />
+        <Point X="1.25" Y="5" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-2.484" Y="3.529" Height="0.182" Width="1.415" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="PageItems" Type="ScipBe.Common.Office.IOneNoteExtPage" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="1.6" />
+        <Point X="8.542" Y="1.6" />
+        <Point X="8.542" Y="5.188" />
+        <Point X="8.25" Y="5.188" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-2.411" Y="3.706" Height="0.182" Width="3.14" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAEAAAAAAIAAAACAAAAAAAAAAAABA=</HashCode>
+      <FileName>OneNoteProvider.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="NotebookItems" />
+      <Property Name="PageItems" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Interface Name="ScipBe.Common.Office.IOneNoteExtNotebook">
+    <Position X="1.25" Y="4.5" Width="2" />
+    <AssociationLine Name="Sections" Type="ScipBe.Common.Office.IOneNoteExtSection">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.068" Y="-0.315" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>OneNoteInterfaces.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Sections" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="ScipBe.Common.Office.IOneNoteExtPage">
+    <Position X="6.25" Y="4.75" Width="2" />
+    <AssociationLine Name="Section" Type="ScipBe.Common.Office.IOneNoteSection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.562" Y="4.75" />
+        <Point X="6.562" Y="4.436" />
+        <Point X="6.073" Y="4.436" Type="JumpStart" />
+        <Point X="5.907" Y="4.436" Type="JumpEnd" />
+        <Point X="5.75" Y="4.436" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="1.12" Y="-0.242" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Notebook" Type="ScipBe.Common.Office.IOneNoteNotebook" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.812" Y="4.75" />
+        <Point X="6.812" Y="4.124" />
+        <Point X="6.25" Y="4.124" />
+        <Point X="6.25" Y="3.094" />
+        <Point X="3.25" Y="3.094" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>OneNoteInterfaces.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Section" />
+      <Property Name="Notebook" />
+    </ShowAsAssociation>
+  </Interface>
+  <Interface Name="ScipBe.Common.Office.IOneNoteExtSection">
+    <Position X="3.75" Y="5.75" Width="2" />
+    <AssociationLine Name="Pages" Type="ScipBe.Common.Office.IOneNotePage" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.75" Y="6.25" />
+        <Point X="5.99" Y="6.25" />
+        <Point X="5.99" Y="3.437" />
+        <Point X="6.25" Y="3.437" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-2.513" Y="-3.088" Height="0.162" Width="2.868" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>OneNoteInterfaces.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Pages" />
+    </ShowAsCollectionAssociation>
+  </Interface>
+  <Interface Name="ScipBe.Common.Office.IOneNoteNotebook">
+    <Position X="1.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAIAAAAAAAQAAAAAAAEAAAAAgAAAAAA=</HashCode>
+      <FileName>OneNoteInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ScipBe.Common.Office.IOneNotePage">
+    <Position X="6.25" Y="2.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQCAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>OneNoteInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ScipBe.Common.Office.IOneNoteSection">
+    <Position X="3.75" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAIAAAAAAAQAAAAAAAAAAAAAgIAAAAA=</HashCode>
+      <FileName>OneNoteInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

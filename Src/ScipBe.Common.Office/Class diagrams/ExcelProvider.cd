@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ScipBe.Common.Office.ExcelProvider">
+    <Position X="0.5" Y="3.75" Width="7.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Rows" Type="ScipBe.Common.Office.IExcelRow">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.109" Y="0.393" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="Columns" Type="ScipBe.Common.Office.IExcelColumn">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-1.484" Y="1.206" Height="0.182" Width="2.728" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAgCAAQAAAAEAAAABAAAgEAAAABEAACEAAAAhAAAA=</HashCode>
+      <FileName>ExcelProvider.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Rows" />
+      <Property Name="Columns" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Interface Name="ScipBe.Common.Office.IExcelColumn">
+    <Position X="0.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAQEAAAAAAAA=</HashCode>
+      <FileName>ExcelInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="ScipBe.Common.Office.IExcelRow">
+    <Position X="3.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABECAAAAAAAAAAAAAAAAAEAAAAAAAg=</HashCode>
+      <FileName>ExcelInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="ScipBe.Common.Office.ExcelVersion">
+    <Position X="6.5" Y="0.5" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAEAAAAAAAAAAAQAA=</HashCode>
+      <FileName>ExcelInterfaces.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
