@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
-  <Class Name="ScipBe.Common.Office.OneNoteProvider">
+  <Class Name="ScipBe.Common.Office.OneNote.OneNoteProvider">
     <Position X="3.75" Y="0.5" Width="2" />
-    <AssociationLine Name="NotebookItems" Type="ScipBe.Common.Office.IOneNoteExtNotebook" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="NotebookItems" Type="ScipBe.Common.Office.OneNote.IOneNoteExtNotebook" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="3.75" Y="1.6" />
         <Point X="0.932" Y="1.6" />
@@ -13,7 +13,7 @@
         <Position X="-2.484" Y="3.529" Height="0.182" Width="1.415" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="PageItems" Type="ScipBe.Common.Office.IOneNoteExtPage" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="PageItems" Type="ScipBe.Common.Office.OneNote.IOneNoteExtPage" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="5.75" Y="1.6" />
         <Point X="8.542" Y="1.6" />
@@ -33,9 +33,9 @@
       <Property Name="PageItems" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Interface Name="ScipBe.Common.Office.IOneNoteExtNotebook">
+  <Interface Name="ScipBe.Common.Office.OneNote.IOneNoteExtNotebook">
     <Position X="1.25" Y="4.5" Width="2" />
-    <AssociationLine Name="Sections" Type="ScipBe.Common.Office.IOneNoteExtSection">
+    <AssociationLine Name="Sections" Type="ScipBe.Common.Office.OneNote.IOneNoteExtSection">
       <MemberNameLabel ManuallyPlaced="true">
         <Position X="0.068" Y="-0.315" />
       </MemberNameLabel>
@@ -48,9 +48,9 @@
       <Property Name="Sections" />
     </ShowAsCollectionAssociation>
   </Interface>
-  <Interface Name="ScipBe.Common.Office.IOneNoteExtPage">
+  <Interface Name="ScipBe.Common.Office.OneNote.IOneNoteExtPage">
     <Position X="6.25" Y="4.75" Width="2" />
-    <AssociationLine Name="Section" Type="ScipBe.Common.Office.IOneNoteSection" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Section" Type="ScipBe.Common.Office.OneNote.IOneNoteSection" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6.562" Y="4.75" />
         <Point X="6.562" Y="4.436" />
@@ -62,7 +62,7 @@
         <Position X="1.12" Y="-0.242" />
       </MemberNameLabel>
     </AssociationLine>
-    <AssociationLine Name="Notebook" Type="ScipBe.Common.Office.IOneNoteNotebook" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Notebook" Type="ScipBe.Common.Office.OneNote.IOneNoteNotebook" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="6.812" Y="4.75" />
         <Point X="6.812" Y="4.124" />
@@ -80,9 +80,9 @@
       <Property Name="Notebook" />
     </ShowAsAssociation>
   </Interface>
-  <Interface Name="ScipBe.Common.Office.IOneNoteExtSection">
+  <Interface Name="ScipBe.Common.Office.OneNote.IOneNoteExtSection">
     <Position X="3.75" Y="5.75" Width="2" />
-    <AssociationLine Name="Pages" Type="ScipBe.Common.Office.IOneNotePage" FixedFromPoint="true" FixedToPoint="true">
+    <AssociationLine Name="Pages" Type="ScipBe.Common.Office.OneNote.IOneNotePage" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="5.75" Y="6.25" />
         <Point X="5.99" Y="6.25" />
@@ -101,21 +101,21 @@
       <Property Name="Pages" />
     </ShowAsCollectionAssociation>
   </Interface>
-  <Interface Name="ScipBe.Common.Office.IOneNoteNotebook">
+  <Interface Name="ScipBe.Common.Office.OneNote.IOneNoteNotebook">
     <Position X="1.25" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAIAAAAAAAQAAAAAAAEAAAAAgAAAAAA=</HashCode>
       <FileName>OneNoteInterfaces.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="ScipBe.Common.Office.IOneNotePage">
+  <Interface Name="ScipBe.Common.Office.OneNote.IOneNotePage">
     <Position X="6.25" Y="2.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAAAAAAAAAQCAAAAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>OneNoteInterfaces.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="ScipBe.Common.Office.IOneNoteSection">
+  <Interface Name="ScipBe.Common.Office.OneNote.IOneNoteSection">
     <Position X="3.75" Y="3.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAgAIAAAAAAAQAAAAAAAAAAAAAgIAAAAA=</HashCode>

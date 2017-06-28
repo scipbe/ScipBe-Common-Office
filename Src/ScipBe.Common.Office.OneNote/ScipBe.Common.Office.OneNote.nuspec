@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>ScipBe.Common.Office.OneNote</id>
+    <version>2.0</version>
+    <authors>Stefan Cruysberghs</authors>
+    <description>
+	LINQ to OneNote
+	- The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote. 
+	</description>
+    <language>en-US</language>
+    <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
+    <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
+    <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.OneNote.png</iconUrl>
+    <releaseNotes>Version 2.0 (June 2017)</releaseNotes>
+    <tags>scipbe linq office onenote</tags>
+  </metadata>
+</package>
+

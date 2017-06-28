@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScipBe.Common.Office", "ScipBe.Common.Office\ScipBe.Common.Office.csproj", "{233D48E6-9618-4861-BD45-683BA450341C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScipBe.Common.Office.OneNote", "ScipBe.Common.Office.OneNote\ScipBe.Common.Office.OneNote.csproj", "{028C2546-1FE2-43C8-B27E-C61C4CB4893A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScipBe.Common.Office.Outlook", "ScipBe.Common.Office.Outlook\ScipBe.Common.Office.Outlook.csproj", "{1894C924-B24A-4D92-8567-02E12958FC92}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F9A40A0-9727-43B1-A525-2E990D93D470}"
+	ProjectSection(SolutionItems) = preProject
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScipBe.Common.Office.Excel", "ScipBe.Common.Office.Excel\ScipBe.Common.Office.Excel.csproj", "{B463D0CB-8EE1-4D64-96FA-D74EAAA4A83F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScipBe.Common.Office.Tests", "ScipBe.Common.Office.Tests\ScipBe.Common.Office.Tests.csproj", "{D14803E0-D696-44A1-A3FC-24D5AC9C7960}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{233D48E6-9618-4861-BD45-683BA450341C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{233D48E6-9618-4861-BD45-683BA450341C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{233D48E6-9618-4861-BD45-683BA450341C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{233D48E6-9618-4861-BD45-683BA450341C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{028C2546-1FE2-43C8-B27E-C61C4CB4893A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{028C2546-1FE2-43C8-B27E-C61C4CB4893A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{028C2546-1FE2-43C8-B27E-C61C4CB4893A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{028C2546-1FE2-43C8-B27E-C61C4CB4893A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1894C924-B24A-4D92-8567-02E12958FC92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1894C924-B24A-4D92-8567-02E12958FC92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1894C924-B24A-4D92-8567-02E12958FC92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1894C924-B24A-4D92-8567-02E12958FC92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B463D0CB-8EE1-4D64-96FA-D74EAAA4A83F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B463D0CB-8EE1-4D64-96FA-D74EAAA4A83F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B463D0CB-8EE1-4D64-96FA-D74EAAA4A83F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B463D0CB-8EE1-4D64-96FA-D74EAAA4A83F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D14803E0-D696-44A1-A3FC-24D5AC9C7960}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D14803E0-D696-44A1-A3FC-24D5AC9C7960}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D14803E0-D696-44A1-A3FC-24D5AC9C7960}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D14803E0-D696-44A1-A3FC-24D5AC9C7960}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
