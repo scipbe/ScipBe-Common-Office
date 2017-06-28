@@ -4,6 +4,7 @@
     <id>ScipBe.Common.Office</id>
     <version>2.0.1</version>
     <authors>Stefan Cruysberghs</authors>
+	<summary>LINQ to Excel, Outlook and OneNote</summary>
     <description>
 	The ScipBe.Common.Office namespace contains 3 classes: ExcelProvider (LINQ to Excel), OutlookProvider (LINQ to Outlook) and OneNoteProvider (LINQ to OneNote). 
 	The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. 
@@ -25,6 +26,6 @@
       - Added references to NuGet packages of OneNote interop and Outlook interop
       - Released 3 new NuGet packages to use ExcelProvider, OutlookProvider and OneNoteProvider standalone
     </releaseNotes>
-    <tags>scipbe linq office excel outlook onenote</tags>
+    <tags>scipbe linq office excel outlook onenote interop</tags>
   </metadata>
 </package>
