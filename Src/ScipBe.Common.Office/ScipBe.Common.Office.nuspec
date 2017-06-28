@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ScipBe.Common.Office</id>
-    <version>2.0</version>
+    <version>2.0.1</version>
     <authors>Stefan Cruysberghs</authors>
     <description>
 	The ScipBe.Common.Office namespace contains 3 classes: ExcelProvider (LINQ to Excel), OutlookProvider (LINQ to Outlook) and OneNoteProvider (LINQ to OneNote). 
