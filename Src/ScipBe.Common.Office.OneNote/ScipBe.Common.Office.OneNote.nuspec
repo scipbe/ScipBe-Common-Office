@@ -5,8 +5,7 @@
     <version>2.0</version>
     <authors>Stefan Cruysberghs</authors>
     <description>
-	LINQ to OneNote
-	- The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote. 
+	LINQ to OneNote. The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote. 
 	</description>
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>

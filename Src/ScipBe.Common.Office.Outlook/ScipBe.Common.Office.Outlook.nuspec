@@ -5,9 +5,7 @@
     <version>2.0</version>
     <authors>Stefan Cruysberghs</authors>
     <description>
-	LINQ to Outlook
-	- The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). 
-	- The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly. So it is required to add this NuGet package to your project.
+	LINQ to Outlook. The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly. So it is required to add this NuGet package to your project.
 	</description>
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
