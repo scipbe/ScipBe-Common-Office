@@ -4,7 +4,7 @@
     <id>ScipBe.Common.Office.Excel</id>
     <version>2.0.1</version>
     <authors>Stefan Cruysberghs</authors>
-	<summary>LINQ to Excel</summary>
+	<summary>LINQ to Excel. Query Excel worksheets and CSV files.</summary>
     <description>
 	The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. All collections are IEnumerable so you can query them with LINQ. The ExcelProvider supports XLSX (Excel 2007-2016, v12-v16), XLS (Excel 97-2003, v8-v11) and CSV (comma, semicolumn or tab delimited ASCII file) files but it requires the installation of the Microsoft Access Database Engine 2010 Redistributable.
 	</description>

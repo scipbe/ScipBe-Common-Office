@@ -4,7 +4,7 @@
     <id>ScipBe.Common.Office</id>
     <version>2.0.1</version>
     <authors>Stefan Cruysberghs</authors>
-	<summary>LINQ to Excel, Outlook and OneNote</summary>
+	<summary>LINQ to Excel, LINQ to Outlook and LINQ to OneNote. Query data of Excel worksheets and CSV files, Outlook Mails, Appointments, Contacts, ... and OneNote Notebooks, Sections and Pages.</summary>
     <description>
 	The ScipBe.Common.Office namespace contains 3 classes: ExcelProvider (LINQ to Excel), OutlookProvider (LINQ to Outlook) and OneNoteProvider (LINQ to OneNote). The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote.  All collections are IEnumerable so you can query them with LINQ. There are also 3 separated NuGet packages with for the Excel, Outlook and OneNote provider so they can be used standalone.
 	</description>

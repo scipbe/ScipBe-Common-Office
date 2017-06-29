@@ -4,7 +4,7 @@
     <id>ScipBe.Common.Office.OneNote</id>
     <version>2.0.1</version>
     <authors>Stefan Cruysberghs</authors>
-	<summary>LINQ to OneNote</summary>
+	<summary>LINQ to OneNote. Query Notebooks, Sections and Pages.</summary>
     <description>
 	The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote. 
 	</description>
