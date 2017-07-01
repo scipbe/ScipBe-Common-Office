@@ -1,0 +1,43 @@
+<Query Kind="Program">
+  <NuGetReference>ScipBe.Common.Office.OneNote</NuGetReference>
+  <Namespace>Microsoft.Office.Interop.OneNote</Namespace>
+  <Namespace>ScipBe.Common.Office.OneNote</Namespace>
+</Query>
+
+void Main()
+{
+    Util.RawHtml($"<h2>ScipBe.Common.Office.OneNote - LINQ to OneNote - Query Notebooks, Sections and Pages</h2>").Dump();
+    
+	var oneNoteProvider = new OneNoteProvider();
+	
+	// Show all encrypted OneNote Notebooks
+	var queryEncryptedSections = 
+	from nb in oneNoteProvider.NotebookItems
+	from s in nb.Sections
+	where s.Encrypted == true
+	select new { NotebookName = nb.Name, SectionName = s.Name };
+	queryEncryptedSections.Dump("All encrypted OneNote Notebooks");
+	
+	// Show all OneNote Notebooks and the number of Sections they have
+	var queryNotebooks = 
+	(from nb in oneNoteProvider.NotebookItems
+	select new { Notebook = nb.Name, SectionCount = nb.Sections.Count() })
+	.OrderByDescending(n => n.SectionCount);	
+	queryNotebooks.Dump("All OneNote Notebooks and the number of Sections they have");
+
+	// Show all OneNote Pages which have been modified last few days
+	var queryPages = 
+	from page in oneNoteProvider.PageItems
+	where page.LastModified > DateTime.Now.AddMonths(-2)	
+	orderby page.LastModified descending
+	select page;	
+	queryPages.Dump("All OneNote Pages which have been modified last few days");	
+	
+	// Show XML content of the OneNote Pages which have been changed the last few days
+	foreach (var item in oneNoteProvider.PageItems.Where(p => p.LastModified > DateTime.Now.AddDays(-2)))
+	{
+		var pageXMLContent = "";
+		oneNoteProvider.OneNote.GetPageContent(item.ID, out pageXMLContent, Microsoft.Office.Interop.OneNote.PageInfo.piBasic);
+        pageXMLContent.Dump($"{item.LastModified} {item.Notebook.Name} {item.Section.Name} {item.Name} {item.DateTime}");
+	}		
+}
