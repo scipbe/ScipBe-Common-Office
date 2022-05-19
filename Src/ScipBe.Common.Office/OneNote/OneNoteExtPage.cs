@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Office.Interop.OneNote;
 
 namespace ScipBe.Common.Office.OneNote
 {
-    internal class OneNoteExtPage : IOneNoteExtPage
+    internal class OneNoteExtPage : OneNotePage, IOneNoteExtPage
     {
-        public string ID { get; set; }
-        public string Name { get; set; }
-        public int Level { get; set; }
-        public DateTime DateTime { get; set; }
-        public DateTime LastModified { get; set; }
+        public OneNoteExtPage(Application oneNote)
+            : base(oneNote) { }
+
         public IOneNoteSection Section { get; set; }
         public IOneNoteNotebook Notebook { get; set; }
     }

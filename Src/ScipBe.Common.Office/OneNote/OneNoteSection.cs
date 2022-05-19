@@ -8,6 +8,6 @@ namespace ScipBe.Common.Office.OneNote
         public string Name { get; set; }
         public string Path { get; set; }
         public bool Encrypted { get; set; }
-        public Color Color { get; set; }
+        public Color? Color { get; set; }
     }
 }

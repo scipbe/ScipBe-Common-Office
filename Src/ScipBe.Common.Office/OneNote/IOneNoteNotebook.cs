@@ -26,6 +26,6 @@ namespace ScipBe.Common.Office.OneNote
         /// <summary>
         /// Color of tab of Notebook.
         /// </summary>
-        Color Color { get; }
+        Color? Color { get; }
     }
 }
