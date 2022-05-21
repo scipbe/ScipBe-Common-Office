@@ -68,7 +68,7 @@ namespace ScipBe.Common.Office.Tests
             Assert.AreEqual("Peter", excel.Rows.Last().Get<string>("B"));
             Assert.AreEqual("Peter", excel.Rows.Last().GetByName<string>("FirstName"));
 
-            Assert.AreEqual(DateTime.Parse("3/05/1979 0:00:00"), excel.Rows.Last().GetByName<DateTime>("BirthDate"));
+            Assert.AreEqual(DateTime.Parse("1979-05-03 0:00:00"), excel.Rows.Last().GetByName<DateTime>("BirthDate"));
         }
     }
 }

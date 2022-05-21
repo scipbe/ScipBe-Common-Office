@@ -22,12 +22,12 @@ namespace ScipBe.Common.Office.Excel
         /// <summary>
         /// Collection of definitions of Excel columns.
         /// </summary>
-        IEnumerable<IExcelColumn> Columns { get; }
+        List<IExcelColumn> Columns { get; }
 
         /// <summary>
         /// Collection of Excel rows.
         /// </summary>
-        IEnumerable<IExcelRow> Rows { get; }
+        List<IExcelRow> Rows { get; }
 
         /// <summary>
         /// Load XLSX, XLS or CSV file of given worksheet.

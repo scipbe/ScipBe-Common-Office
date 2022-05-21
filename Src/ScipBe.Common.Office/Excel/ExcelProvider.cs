@@ -18,53 +18,31 @@ namespace ScipBe.Common.Office.Excel
     /// </remarks>
     public class ExcelProvider : IExcelProvider
     {
-        private string sheetName;
-        private string fileName;
-        private FileType fileType;
-
-        private readonly List<IExcelRow> rows = new List<IExcelRow>();
-        private readonly List<IExcelColumn> columns = new List<IExcelColumn>();
-
         /// <summary>
         /// File name of Excel XLSX/XLS or CSV file.
         /// </summary>
-        public string FileName
-        {
-            get { return fileName; }
-        }
+        public string FileName { get; private set; }
 
         /// <summary>
         /// Type of File: XLSX, XLS or CSV.
         /// </summary>
-        public FileType FileType
-        {
-           get { return fileType; }
-        }
+        public FileType FileType { get; private set; }
 
         /// <summary>
         /// Name of worksheet.
         /// </summary>
-        public string SheetName
-        {
-            get { return sheetName; }
-        }
+        public string SheetName { get; private set; }
 
         /// <summary>
         /// Collection of Excel rows.
         /// </summary>
-        public IEnumerable<IExcelRow> Rows
-        {
-            get { return rows; }
-        }
+        public List<IExcelRow> Rows { get; private set; } = new List<IExcelRow>();
 
         /// <summary>
         /// Collection of definitions of Excel columns.
         /// </summary>
 
-        public IEnumerable<IExcelColumn> Columns
-        {
-            get { return columns; }
-        }
+        public List<IExcelColumn> Columns { get; private set; } = new List<IExcelColumn>();
 
         /// <summary>
         /// Constructor of ExcelProvider, it will load Excel worksheet or CSV into Rows and Columns collections.
@@ -87,7 +65,6 @@ namespace ScipBe.Common.Office.Excel
         /// </summary>
         public ExcelProvider()
         {
-
         }
 
         /// <summary>
@@ -104,16 +81,16 @@ namespace ScipBe.Common.Office.Excel
         /// </remarks>
         public void Load(string fileName, string sheetName = null)
         {
-            this.fileName = fileName;
-            this.fileType = GetFileType();
-            this.sheetName = sheetName;
+            this.FileName = fileName;
+            this.FileType = GetFileType();
+            this.SheetName = sheetName;
 
             if (!File.Exists(fileName))
             {
                 throw new FileNotFoundException($"File {fileName} does not exist");
             }
 
-            if ((fileType != FileType.Csv) && (string.IsNullOrEmpty(sheetName)))
+            if ((FileType != FileType.Csv) && (string.IsNullOrEmpty(sheetName)))
             {
                 throw new ArgumentNullException(nameof(sheetName), $"Worksheet name is required for file {fileName}");
             }
@@ -123,51 +100,46 @@ namespace ScipBe.Common.Office.Excel
 
         private FileType GetFileType()
         {
-            var extension = Path.GetExtension(fileName).ToUpper();
-            if (extension == ".XLSX")
+            var extension = Path.GetExtension(FileName).ToUpper();
+            switch (extension)
             {
-                return FileType.Xlsx;
-            }
-            else if (extension == ".XLS")
-            {
-                return FileType.Xls;
-            }
-            else if (extension == ".CSV")
-            {
-                return FileType.Csv;
-            }
-            else
-            {
-                throw new ArgumentException($"File {fileName} with extension {extension} is not supported");
+                case ".XLSX":
+                    return FileType.Xlsx;
+                case ".XLS":
+                    return FileType.Xls;
+                case ".CSV":
+                    return FileType.Csv;
+                default:
+                    throw new ArgumentException($"File {FileName} with extension {extension} is not supported");
             }
         }
 
         private string GetConnectionString()
         {
-            switch (fileType)
+            switch (FileType)
             {
                 case FileType.Xls:
-                    return $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={fileName};Extended Properties=""Excel 8.0;HDR=YES;""";
+                    return $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={FileName};Extended Properties=""Excel 8.0;HDR=YES;""";
                 case FileType.Csv:
                     // https://msdn.microsoft.com/en-us/library/ms974559.aspx
                     // The delimiter of the CSV can be specified in the registry at the following location: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Jet\4.0\Engines\Text
                     // Format can be "TabDelimited", "CSVDelimited" or "Delimited(;)"
                     // Or create a schema.ini file in the same folder as the CSV file where you specify the delimiter
                     // "HDR=Yes;" indicates that the first row contains column names, not data. "HDR=No;" indicates the opposite.
-                    return $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Path.GetDirectoryName(fileName)};Extended Properties=""text;HDR=Yes;FMT=Delimited;""";
+                    return $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Path.GetDirectoryName(FileName)};Extended Properties=""text;HDR=Yes;FMT=Delimited;""";
                 default:
-                    return $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={fileName};Extended Properties=""Excel 12.0 Xml;HDR=YES""";
+                    return $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={FileName};Extended Properties=""Excel 12.0 Xml;HDR=YES""";
             }
         }
 
         private string GetCommandText()
         {
-            switch (fileType)
+            switch (FileType)
             {
                 case FileType.Csv:
-                    return $"SELECT * FROM {Path.GetFileName(fileName)}";
+                    return $"SELECT * FROM {Path.GetFileName(FileName)}";
                 default:
-                    return $"SELECT * FROM [{sheetName}$]";
+                    return $"SELECT * FROM [{SheetName}$]";
             }
         }
 
@@ -189,19 +161,19 @@ namespace ScipBe.Common.Office.Excel
                             // Run through fields and create column objects
                             for (int i = 0; i < reader.FieldCount; i++)
                             {
-                                columns.Add(new ExcelColumn(i, reader.GetName(i), reader.GetFieldType(i)));
+                                Columns.Add(new ExcelColumn(i, reader.GetName(i), reader.GetFieldType(i)));
                             }
 
                             int rowCount = 1;
                             // Run through records and create rows with cells with contain the values
                             while (reader.Read())
                             {
-                                var newRow = new ExcelRow(rowCount++, columns);
+                                var newRow = new ExcelRow(rowCount++, Columns);
                                 for (int index = 0; index < reader.FieldCount; index++)
                                 {
                                     newRow.AddCell(reader[index]);
                                 }
-                                rows.Add(newRow);
+                                Rows.Add(newRow);
                             }
                         }
                     }
