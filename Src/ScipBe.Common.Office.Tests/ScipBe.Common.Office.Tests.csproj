@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Excel\ExcelProvidertTest.cs" />
-    <Compile Include="OneNote\OneNoteProvidertTest.cs" />
+    <Compile Include="OneNote\OneNoteProviderTest.cs" />
     <Compile Include="Outlook\OutlookProvidertTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

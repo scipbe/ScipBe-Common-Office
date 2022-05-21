@@ -6,7 +6,7 @@ using ScipBe.Common.Office.OneNote;
 namespace ScipBe.Common.Office.Tests
 {
     [TestClass]
-    public class OneNoteProvidertTest
+    public class OneNoteProviderTest
     {
         [TestMethod]
         public void Notebooks()
@@ -32,6 +32,32 @@ namespace ScipBe.Common.Office.Tests
 
             // Arrange
             Assert.IsTrue(pages.Count() > 0);
+        }
+
+        [TestMethod]
+        public void EnumerateSections()
+        {
+            // Arrange
+            var oneNoteProvider = new OneNoteProvider();
+
+            // Act
+            var sections = oneNoteProvider.NotebookItems.SelectMany(n => n.Sections);
+
+            // Arrange
+            Assert.IsTrue(sections.Any());
+        }
+
+        [TestMethod]
+        public void FindPages()
+        {
+            // Arrange
+            var oneNoteProvider = new OneNoteProvider();
+
+            // Act
+            var pages = oneNoteProvider.FindPages("the");
+
+            // Arrange
+            Assert.IsTrue(pages.Any());
         }
     }
 }

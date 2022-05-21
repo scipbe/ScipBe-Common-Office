@@ -1,8 +1,8 @@
-﻿using ScipBe.Common.Office.Utils;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Xml.Linq;
+using ScipBe.Common.Office.Utils;
 
 namespace ScipBe.Common.Office.OneNote
 {
@@ -18,19 +18,12 @@ namespace ScipBe.Common.Office.OneNote
     /// </remarks>
     public class OneNoteProvider : IOneNoteProvider
     {
-        private readonly Microsoft.Office.Interop.OneNote.Application oneNote;
-
-        private readonly string oneNoteXMLHierarchy = "";
-
         /// <summary>
         /// Constructor. Create instance of Microsoft.Office.Interop.OneNote.Application and get XML hierarchy.
         /// </summary>
         public OneNoteProvider()
         {
-            oneNote = new Microsoft.Office.Interop.OneNote.Application();
-
-            // Get OneNote hierarchy as XML document
-            oneNote.GetHierarchy(null, Microsoft.Office.Interop.OneNote.HierarchyScope.hsPages, out oneNoteXMLHierarchy);
+            this.OneNote = new Microsoft.Office.Interop.OneNote.Application();
         }
 
         /// <summary>
@@ -42,10 +35,7 @@ namespace ScipBe.Common.Office.OneNote
         /// <item>http://msdn.microsoft.com/en-us/library/aa286798.aspx</item>
         /// </list>
         /// </remarks>
-        public Microsoft.Office.Interop.OneNote.Application OneNote
-        {
-            get { return oneNote; }
-        }
+        public Microsoft.Office.Interop.OneNote.Application OneNote { get; private set; }
 
         /// <summary>
         /// Hierarchy of Notebooks with Sections and Pages.
@@ -54,39 +44,16 @@ namespace ScipBe.Common.Office.OneNote
         {
             get
             {
+                // Get OneNote hierarchy as XML document
+                this.OneNote.GetHierarchy(null, Microsoft.Office.Interop.OneNote.HierarchyScope.hsPages, out string oneNoteXMLHierarchy);
+
                 var oneNoteHierarchy = XElement.Parse(oneNoteXMLHierarchy);
                 var one = oneNoteHierarchy.GetNamespaceOfPrefix("one");
 
                 // Transform XML into object hierarchy
-                var oneNoteNotebookItems =
-                    from n in oneNoteHierarchy.Elements(one + "Notebook")
-                    where n.HasAttributes
-                    select new OneNoteExtNotebook()
-                    {
-                        ID = n.Attribute("ID").Value,
-                        Name = n.Attribute("name").Value,
-                        NickName = n.Attribute("nickname").Value,
-                        Path = n.Attribute("path").Value,
-                        Color = ColorTranslator.FromHtml(n.Attribute("color").Value),
-                        Sections = n.Elements(one + "Section").Select(s => new OneNoteExtSection()
-                        {
-                            ID = s.Attribute("ID").Value,
-                            Name = s.Attribute("name").Value,
-                            Path = s.Attribute("path").Value,
-                            Color = ColorTranslator.FromHtml(s.Attribute("color").Value),
-                            Encrypted = ((s.Attribute("encrypted") != null) && (s.Attribute("encrypted").Value == "true")),
-                            Pages = s.Elements(one + "Page").Select(p => new OneNotePage()
-                            {
-                                ID = p.Attribute("ID").Value,
-                                Name = p.Attribute("name").Value,
-                                Level = p.Attribute("pageLevel").Value.ToInt32(),
-                                DateTime = p.Attribute("dateTime").Value.ToString().ToDateTime(),
-                                LastModified = p.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
-                            }).OfType<IOneNotePage>()
-                        }).OfType<IOneNoteExtSection>()
-                    };
-
-                return oneNoteNotebookItems.OfType<IOneNoteExtNotebook>();
+                return from n in oneNoteHierarchy.Elements(one + "Notebook")
+                       where n.HasAttributes
+                       select this.ParseNotebook(n, one, true);
             }
         }
 
@@ -97,41 +64,92 @@ namespace ScipBe.Common.Office.OneNote
         {
             get
             {
-                var oneNoteHierarchy = XElement.Parse(oneNoteXMLHierarchy);
-                var one = oneNoteHierarchy.GetNamespaceOfPrefix("one");
+                // Get OneNote hierarchy as XML document
+                this.OneNote.GetHierarchy(null, Microsoft.Office.Interop.OneNote.HierarchyScope.hsPages, out string oneNoteXMLHierarchy);
 
-                // Transform XML into object collection
-                var oneNotePageItems =
-                    from p in oneNoteHierarchy.Elements(one + "Notebook").Elements().Elements()
-                    where p.HasAttributes
-                    && p.Name.LocalName == "Page"
-                    select new OneNoteExtPage()
-                    {
-                        ID = p.Attribute("ID").Value,
-                        Name = p.Attribute("name").Value,
-                        Level = p.Attribute("pageLevel").Value.ToInt32(),
-                        DateTime = p.Attribute("dateTime").Value.ToString().ToDateTime(),
-                        LastModified = p.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
-                        Section = new OneNoteSection()
-                        {
-                            ID = p.Parent.Attribute("ID").Value,
-                            Name = p.Parent.Attribute("name").Value,
-                            Path = p.Parent.Attribute("path").Value,
-                            Color = ColorTranslator.FromHtml(p.Parent.Attribute("color").Value),
-                            Encrypted = ((p.Parent.Attribute("encrypted") != null) && (p.Parent.Attribute("encrypted").Value == "true"))
-                        },
-                        Notebook = new OneNoteNotebook()
-                        {
-                            ID = p.Parent.Parent.Attribute("ID").Value,
-                            Name = p.Parent.Parent.Attribute("name").Value,
-                            NickName = p.Parent.Parent.Attribute("nickname").Value,
-                            Path = p.Parent.Parent.Attribute("path").Value,
-                            Color = ColorTranslator.FromHtml(p.Parent.Parent.Attribute("color").Value)
-                        }
-                    };
-
-                return oneNotePageItems.OfType<IOneNoteExtPage>();
+                return this.ParsePages(oneNoteXMLHierarchy);
             }
+        }
+
+        /// <summary>
+        /// Returns a list of pages that match the specified query term.
+        /// </summary>
+        /// <param name="searchString">The search string. Pass exactly the same string that you would type into the search box in the OneNote UI. You can use bitwise operators, such as AND and OR, which must be all uppercase.</param>
+        public IEnumerable<IOneNoteExtPage> FindPages(string searchString)
+        {
+            this.OneNote.FindPages(null, searchString, out string xml);
+
+            return this.ParsePages(xml);
+        }
+
+        private IOneNoteExtNotebook ParseNotebook(XElement element, XNamespace oneNamespace, bool addSections)
+        {
+            var notebook = new OneNoteExtNotebook()
+            {
+                ID = element.Attribute("ID").Value,
+                Name = element.Attribute("name").Value,
+                NickName = element.Attribute("nickname").Value,
+                Path = element.Attribute("path").Value,
+                Color = element.Attribute("color").Value != "none" ? ColorTranslator.FromHtml(element.Attribute("color").Value) : (Color?)null,
+            };
+
+            if (addSections)
+            {
+                notebook.Sections = element.Elements(oneNamespace + "Section").Select(s => this.ParseSection(s, oneNamespace, true));
+            }
+
+            return notebook;
+        }
+
+        private IOneNoteExtSection ParseSection(XElement element, XNamespace oneNamespace, bool addPages)
+        {
+            var section = new OneNoteExtSection()
+            {
+                ID = element.Attribute("ID").Value,
+                Name = element.Attribute("name").Value,
+                Path = element.Attribute("path").Value,
+                Color = element.Attribute("color").Value != "none" ? ColorTranslator.FromHtml(element.Attribute("color").Value) : (Color?)null,
+                Encrypted = (element.Attribute("encrypted") != null) && (element.Attribute("encrypted").Value == "true"),
+            };
+
+            if (addPages)
+            {
+                section.Pages = element.Elements(oneNamespace + "Page").Select(p => this.ParsePage(p, oneNamespace, false));
+            }
+
+            return section;
+        }
+
+        private IOneNoteExtPage ParsePage(XElement element, XNamespace oneNamespace, bool addParents)
+        {
+            var page = new OneNoteExtPage(this.OneNote)
+            {
+                ID = element.Attribute("ID").Value,
+                Name = element.Attribute("name").Value,
+                Level = element.Attribute("pageLevel").Value.ToInt32(),
+                DateTime = element.Attribute("dateTime").Value.ToString().ToDateTime(),
+                LastModified = element.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
+            };
+
+            if (addParents)
+            {
+                page.Section = this.ParseSection(element.Parent, oneNamespace, false);
+                page.Notebook = this.ParseNotebook(element.Parent.Parent, oneNamespace, false);
+            }
+
+            return page;
+        }
+
+        private IEnumerable<IOneNoteExtPage> ParsePages(string xml)
+        {
+            var doc = XElement.Parse(xml);
+            var one = doc.GetNamespaceOfPrefix("one");
+
+            // Transform XML into object collection
+            return from p in doc.Elements(one + "Notebook").Elements().Elements()
+                   where p.HasAttributes
+                   && p.Name.LocalName == "Page"
+                   select this.ParsePage(p, one, true);
         }
     }
 }
