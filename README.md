@@ -45,7 +45,10 @@ Remarks
 
 History
 =================================================================
-
+- Version 2.0.2 (May 2022)
+  - Migrated to .NET Standard 2.0 to allow .NET Core projects to consume
+  - Added FindPages API to OneNoteProvider, and OpenInOneNote method to OneNotePage
+  - A couple bug fixes and improvements in the OneNote project and the unit tests
 - Version 2.0 (June 2017)
   - Migrated to .NET 4.6
   - Fixed some bugfixes and implemented small improvements
