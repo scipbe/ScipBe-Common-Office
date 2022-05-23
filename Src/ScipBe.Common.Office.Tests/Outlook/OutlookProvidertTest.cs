@@ -18,7 +18,7 @@ namespace ScipBe.Common.Office.Tests
             var folders = outlook.Folders;
 
             // Assert
-            Assert.IsTrue(outlook.Folders.Count() > 0);
+            Assert.IsTrue(outlook.Folders.Any());
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace ScipBe.Common.Office.Tests
             var contactItems = outlook.ContactItems;
 
             // Assert
-            Assert.IsTrue(contactItems.Count() > 0);
+            Assert.IsTrue(contactItems.Any());
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace ScipBe.Common.Office.Tests
             var calendarItems = outlook.CalendarItems;
 
             // Assert
-            Assert.IsTrue(calendarItems.Count() > 0);
+            Assert.IsTrue(calendarItems.Any());
         }
 
         [TestMethod]
@@ -57,7 +57,7 @@ namespace ScipBe.Common.Office.Tests
             var inboxItems = outlook.InboxItems;
 
             // Assert
-            Assert.IsTrue(inboxItems.Count() > 0);
+            Assert.IsTrue(inboxItems.Any());
         }
 
         [TestMethod]
@@ -70,7 +70,7 @@ namespace ScipBe.Common.Office.Tests
             var sentMailItems = outlook.SentMailItems;
 
             // Assert
-            Assert.IsTrue(sentMailItems.Count() > 0);
+            Assert.IsTrue(sentMailItems.Any());
         }
 
         [TestMethod]
@@ -84,7 +84,7 @@ namespace ScipBe.Common.Office.Tests
             var mailItems = outlook.GetItems<MailItem>(folder);
 
             // Assert
-            Assert.IsTrue(mailItems.Count() > 0);
+            Assert.IsTrue(mailItems.Any());
         }
 
         [TestMethod]
@@ -98,7 +98,7 @@ namespace ScipBe.Common.Office.Tests
             var appointmentItems = outlook.GetItems<AppointmentItem>(folder.FolderPath);
 
             // Assert
-            Assert.IsTrue(appointmentItems.Count() > 0);
+            Assert.IsTrue(appointmentItems.Any());
         }
     }
 }
