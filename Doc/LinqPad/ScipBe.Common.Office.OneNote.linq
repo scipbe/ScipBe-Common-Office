@@ -10,6 +10,11 @@ void Main()
     
 	var oneNoteProvider = new OneNoteProvider();
 	
+    // Find pages containing the word "onenote"
+    oneNoteProvider.FindPages("onenote")
+    .Select(p => new { NotebookName = p.Notebook.Name, SectionName = p.Section.Name, p.Name })
+    .Dump("All OneNote Pages containing the word \"onenote\"");
+    
 	// Show all encrypted OneNote Notebooks
 	var queryEncryptedSections = 
 	from nb in oneNoteProvider.NotebookItems
@@ -30,7 +35,7 @@ void Main()
 	from page in oneNoteProvider.PageItems
 	where page.LastModified > DateTime.Now.AddMonths(-2)	
 	orderby page.LastModified descending
-	select page;	
+	select new { NotebookName = page.Notebook.Name, SectionName = page.Section.Name, page.Name, page.LastModified };
 	queryPages.Dump("All OneNote Pages which have been modified last few days");	
 	
 	// Show XML content of the OneNote Pages which have been changed the last few days
