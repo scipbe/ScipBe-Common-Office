@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ScipBe.Common.Office</id>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <authors>Stefan Cruysberghs</authors>
 	  <summary>LINQ to Excel, LINQ to Outlook and LINQ to OneNote. Query data of Excel worksheets and CSV files, Outlook Mails, Appointments, Contacts, ... and OneNote Notebooks, Sections and Pages.</summary>
     <description>The ScipBe.Common.Office namespace contains 3 classes: ExcelProvider (LINQ to Excel), OutlookProvider (LINQ to Outlook) and OneNoteProvider (LINQ to OneNote). The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote.  All collections are IEnumerable so you can query them with LINQ. There are also 3 separated NuGet packages with for the Excel, Outlook and OneNote provider so they can be used standalone.</description>
@@ -11,11 +11,15 @@
     <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
     <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.png</iconUrl>
     <releaseNotes>
-      Version 2.0.2 (May 2022)
+      Version 2.0.3 (May 2022)
       - Migrated to .NET Standard 2.0 to allow .NET Core projects to consume
       - Added FindPages API to OneNoteProvider, and OpenInOneNote method to OneNotePage
       - A couple bug fixes and improvements in the OneNote project and the unit tests
     </releaseNotes>
     <tags>scipbe linq office excel outlook onenote interop</tags>
+    <dependencies>
+      <dependency id="Interop.Microsoft.Office.Interop.OneNote" version="1.1.0" />
+      <dependency id="Microsoft.Office.Interop.Outlook" version="15.0.4797.1003" />
+    </dependencies>
   </metadata>
 </package>
