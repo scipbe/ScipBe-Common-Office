@@ -18,6 +18,15 @@ namespace ScipBe.Common.Office.OneNote
         public DateTime DateTime { get; set; }
         public DateTime LastModified { get; set; }
 
+        public string GetContent()
+        {
+            return OneNoteProvider.CallOneNoteSafely(oneNote =>
+            {
+                oneNote.GetPageContent(this.ID, out string content);
+                return content;
+            });
+        }
+
         public void OpenInOneNote()
         {
             this.oneNote.NavigateTo(this.ID);
