@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ScipBe.Common.Office.Excel</id>
-    <version>2.0.3</version>
+    <version>3.0.0</version>
     <authors>Stefan Cruysberghs</authors>
 	  <summary>LINQ to Excel. Query Excel worksheets and CSV files.</summary>
     <description>The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. All collections are IEnumerable so you can query them with LINQ. The ExcelProvider supports XLSX (Excel 2007-2016, v12-v16), XLS (Excel 97-2003, v8-v11) and CSV (comma, semicolumn or tab delimited ASCII file) files but it requires the installation of the Microsoft Access Database Engine 2010 Redistributable.</description>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
     <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
     <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Excel.png</iconUrl>
-    <releaseNotes>Version 2.0.3 (May 2022)</releaseNotes>
+    <releaseNotes>Version 3.0.0 (May 2022)</releaseNotes>
     <tags>scipbe linq office excel ado xlsx xls csv worksheet</tags>
   </metadata>
 </package>
