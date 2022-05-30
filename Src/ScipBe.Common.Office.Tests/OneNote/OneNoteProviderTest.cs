@@ -11,11 +11,8 @@ namespace ScipBe.Common.Office.Tests
         [TestMethod]
         public void Notebooks()
         {
-            // Arrange
-            var oneNoteProvider = new OneNoteProvider();
-
             // Act
-            var notebooks = oneNoteProvider.NotebookItems;
+            var notebooks = OneNoteProvider.NotebookItems;
 
             // Arrange
             Assert.IsTrue(notebooks.Any());
@@ -24,11 +21,8 @@ namespace ScipBe.Common.Office.Tests
         [TestMethod]
         public void Pages()
         {
-            // Arrange
-            var oneNoteProvider = new OneNoteProvider();
-
             // Act
-            var pages = oneNoteProvider.PageItems;
+            var pages = OneNoteProvider.PageItems;
 
             // Arrange
             Assert.IsTrue(pages.Any());
@@ -37,11 +31,8 @@ namespace ScipBe.Common.Office.Tests
         [TestMethod]
         public void EnumerateSections()
         {
-            // Arrange
-            var oneNoteProvider = new OneNoteProvider();
-
             // Act
-            var sections = oneNoteProvider.NotebookItems.SelectMany(n => n.Sections);
+            var sections = OneNoteProvider.NotebookItems.SelectMany(n => n.Sections);
 
             // Arrange
             Assert.IsTrue(sections.Any());
@@ -50,11 +41,8 @@ namespace ScipBe.Common.Office.Tests
         [TestMethod]
         public void FindPages()
         {
-            // Arrange
-            var oneNoteProvider = new OneNoteProvider();
-
             // Act
-            var pages = oneNoteProvider.FindPages("the");
+            var pages = OneNoteProvider.FindPages("the");
 
             // Arrange
             Assert.IsTrue(pages.Any());
@@ -63,12 +51,9 @@ namespace ScipBe.Common.Office.Tests
         [TestMethod]
         public void GetContent()
         {
-            // Arrange
-            var oneNoteProvider = new OneNoteProvider();
-
             // Act
-            var page = oneNoteProvider.PageItems.First();
-            oneNoteProvider.OneNote.GetPageContent(page.ID, out string content);
+            var page = OneNoteProvider.PageItems.First();
+            string content = page.GetContent();
 
             // Arrange
             Assert.IsFalse(string.IsNullOrWhiteSpace(content));

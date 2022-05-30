@@ -33,8 +33,14 @@ namespace ScipBe.Common.Office.OneNote
         DateTime LastModified { get; }
 
         /// <summary>
+        /// Gets page content as an xml string.
+        /// </summary>
+        string GetContent();
+
+        /// <summary>
         /// Open this page in the OneNote app.
         /// </summary>
         void OpenInOneNote();
+
     }
 }
