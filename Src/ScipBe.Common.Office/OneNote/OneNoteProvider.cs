@@ -63,7 +63,7 @@ namespace ScipBe.Common.Office.OneNote
         /// Returns a list of pages that match the specified query term.
         /// </summary>
         /// <param name="searchString">The search string. Pass exactly the same string that you would type into the search box in the OneNote UI. You can use bitwise operators, such as AND and OR, which must be all uppercase.</param>
-        public static  IEnumerable<IOneNoteExtPage> FindPages(string searchString)
+        public static IEnumerable<IOneNoteExtPage> FindPages(string searchString)
         {
             return CallOneNoteSafely(oneNote =>
             {
@@ -112,25 +112,22 @@ namespace ScipBe.Common.Office.OneNote
 
         private static IOneNoteExtPage ParsePage(XElement element, XNamespace oneNamespace, bool addParents)
         {
-            return CallOneNoteSafely(oneNote =>
+            var page = new OneNoteExtPage()
             {
-                var page = new OneNoteExtPage(oneNote)
-                {
-                    ID = element.Attribute("ID").Value,
-                    Name = element.Attribute("name").Value,
-                    Level = element.Attribute("pageLevel").Value.ToInt32(),
-                    DateTime = element.Attribute("dateTime").Value.ToString().ToDateTime(),
-                    LastModified = element.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
-                };
+                ID = element.Attribute("ID").Value,
+                Name = element.Attribute("name").Value,
+                Level = element.Attribute("pageLevel").Value.ToInt32(),
+                DateTime = element.Attribute("dateTime").Value.ToString().ToDateTime(),
+                LastModified = element.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
+            };
 
-                if (addParents)
-                {
-                    page.Section = ParseSection(element.Parent, oneNamespace, false);
-                    page.Notebook = ParseNotebook(element.Parent.Parent, oneNamespace, false);
-                }
+            if (addParents)
+            {
+                page.Section = ParseSection(element.Parent, oneNamespace, false);
+                page.Notebook = ParseNotebook(element.Parent.Parent, oneNamespace, false);
+            }
 
-                return page;
-            });
+            return page;
         }
 
         private static IEnumerable<IOneNoteExtPage> ParsePages(string xml)
@@ -155,7 +152,10 @@ namespace ScipBe.Common.Office.OneNote
             }
             finally
             {
-                Marshal.ReleaseComObject(oneNote);
+                if (oneNote != null)
+                {
+                    Marshal.ReleaseComObject(oneNote);
+                }
             }
         }
     }

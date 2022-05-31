@@ -11,7 +11,7 @@
     <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
     <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.png</iconUrl>
     <releaseNotes>
-      Version 3.0.0 (May 2022)
+      Version 3.0.1 (May 2022)
       - Migrated to .NET Standard 2.0 to allow .NET Core projects to consume (#8)
       - Switched OneNoteProvider to be static, and to release the COM interop library around every call, and adding a GetContent() method to PageItem (#11, #3)
       - Added FindPages API to OneNoteProvider, and OpenInOneNote method to OneNotePage (#2, #6)

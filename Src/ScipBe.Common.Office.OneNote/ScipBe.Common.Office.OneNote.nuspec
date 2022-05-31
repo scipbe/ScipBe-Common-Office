@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
     <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
     <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.OneNote.png</iconUrl>
-    <releaseNotes>Version 3.0.0 (May 2022)</releaseNotes>
+    <releaseNotes>Version 3.0.1 (May 2022)</releaseNotes>
     <tags>scipbe linq office onenote interop notebook section page</tags>
     <dependencies>
       <dependency id="Interop.Microsoft.Office.Interop.OneNote" version="1.1.0" />

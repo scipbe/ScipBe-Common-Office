@@ -5,11 +5,8 @@ namespace ScipBe.Common.Office.OneNote
 {
     internal class OneNotePage : IOneNotePage
     {
-        private readonly Application oneNote;
-
-        public OneNotePage(Application oneNote)
+        public OneNotePage()
         {
-            this.oneNote = oneNote;
         }
 
         public string ID { get; set; }
@@ -29,7 +26,11 @@ namespace ScipBe.Common.Office.OneNote
 
         public void OpenInOneNote()
         {
-            this.oneNote.NavigateTo(this.ID);
+            OneNoteProvider.CallOneNoteSafely(oneNote =>
+            {
+                oneNote.NavigateTo(this.ID);
+                return true;
+            });
         }
     }
 }
