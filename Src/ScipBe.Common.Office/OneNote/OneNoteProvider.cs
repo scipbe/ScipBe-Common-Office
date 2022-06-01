@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -85,7 +86,7 @@ namespace ScipBe.Common.Office.OneNote
 
             if (addSections)
             {
-                notebook.Sections = element.Elements(oneNamespace + "Section").Select(s => ParseSection(s, oneNamespace, true));
+                notebook.Sections = element.Descendants(oneNamespace + "Section").Select(s => ParseSection(s, oneNamespace, true));
             }
 
             return notebook;
@@ -124,19 +125,29 @@ namespace ScipBe.Common.Office.OneNote
             if (addParents)
             {
                 page.Section = ParseSection(element.Parent, oneNamespace, false);
-                page.Notebook = ParseNotebook(element.Parent.Parent, oneNamespace, false);
+
+                var notebookElement = element.Parent.Parent;
+                if (notebookElement.Name.LocalName == "SectionGroup")
+                {
+                    notebookElement = notebookElement.Parent;
+                }
+
+                page.Notebook = ParseNotebook(notebookElement, oneNamespace, false);
             }
 
             return page;
         }
 
-        private static IEnumerable<IOneNoteExtPage> ParsePages(string xml)
+        public static IEnumerable<IOneNoteExtPage> ParsePages(string xml)
         {
             var doc = XElement.Parse(xml);
             var one = doc.GetNamespaceOfPrefix("one");
 
+            var sections = from section in doc.Elements(one + "Notebook").Descendants(one + "Section")
+                           select section;
+
             // Transform XML into object collection
-            return from p in doc.Elements(one + "Notebook").Elements().Elements()
+            return from p in sections.Elements()
                    where p.HasAttributes
                    && p.Name.LocalName == "Page"
                    select ParsePage(p, one, true);
@@ -147,7 +158,11 @@ namespace ScipBe.Common.Office.OneNote
             Application oneNote = null;
             try
             {
-                oneNote = new Application();
+                oneNote = Util.TryCatchAndRetry<Application, COMException>(
+                    () => new Application(),
+                    TimeSpan.FromMilliseconds(100),
+                    3,
+                    ex => Trace.TraceError(ex.Message));
                 return action(oneNote);
             }
             finally
