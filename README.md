@@ -45,6 +45,8 @@ Remarks
 
 History
 =================================================================
+- Version 3.0.1 (May 2022)
+  - Fixed some issues around interacting with the OneNote interop library (#13)
 - Version 3.0.0 (May 2022)
   - Migrated to .NET Standard 2.0 to allow .NET Core projects to consume (#8)
   - Switched OneNoteProvider to be static, and to release the COM interop library around every call, and adding a GetContent() method to PageItem (#11, #3)

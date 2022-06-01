@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -63,7 +64,7 @@ namespace ScipBe.Common.Office.OneNote
         /// Returns a list of pages that match the specified query term.
         /// </summary>
         /// <param name="searchString">The search string. Pass exactly the same string that you would type into the search box in the OneNote UI. You can use bitwise operators, such as AND and OR, which must be all uppercase.</param>
-        public static  IEnumerable<IOneNoteExtPage> FindPages(string searchString)
+        public static IEnumerable<IOneNoteExtPage> FindPages(string searchString)
         {
             return CallOneNoteSafely(oneNote =>
             {
@@ -85,7 +86,7 @@ namespace ScipBe.Common.Office.OneNote
 
             if (addSections)
             {
-                notebook.Sections = element.Elements(oneNamespace + "Section").Select(s => ParseSection(s, oneNamespace, true));
+                notebook.Sections = element.Descendants(oneNamespace + "Section").Select(s => ParseSection(s, oneNamespace, true));
             }
 
             return notebook;
@@ -112,34 +113,41 @@ namespace ScipBe.Common.Office.OneNote
 
         private static IOneNoteExtPage ParsePage(XElement element, XNamespace oneNamespace, bool addParents)
         {
-            return CallOneNoteSafely(oneNote =>
+            var page = new OneNoteExtPage()
             {
-                var page = new OneNoteExtPage(oneNote)
-                {
-                    ID = element.Attribute("ID").Value,
-                    Name = element.Attribute("name").Value,
-                    Level = element.Attribute("pageLevel").Value.ToInt32(),
-                    DateTime = element.Attribute("dateTime").Value.ToString().ToDateTime(),
-                    LastModified = element.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
-                };
+                ID = element.Attribute("ID").Value,
+                Name = element.Attribute("name").Value,
+                Level = element.Attribute("pageLevel").Value.ToInt32(),
+                DateTime = element.Attribute("dateTime").Value.ToString().ToDateTime(),
+                LastModified = element.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
+            };
 
-                if (addParents)
+            if (addParents)
+            {
+                page.Section = ParseSection(element.Parent, oneNamespace, false);
+
+                var notebookElement = element.Parent.Parent;
+                if (notebookElement.Name.LocalName == "SectionGroup")
                 {
-                    page.Section = ParseSection(element.Parent, oneNamespace, false);
-                    page.Notebook = ParseNotebook(element.Parent.Parent, oneNamespace, false);
+                    notebookElement = notebookElement.Parent;
                 }
 
-                return page;
-            });
+                page.Notebook = ParseNotebook(notebookElement, oneNamespace, false);
+            }
+
+            return page;
         }
 
-        private static IEnumerable<IOneNoteExtPage> ParsePages(string xml)
+        public static IEnumerable<IOneNoteExtPage> ParsePages(string xml)
         {
             var doc = XElement.Parse(xml);
             var one = doc.GetNamespaceOfPrefix("one");
 
+            var sections = from section in doc.Elements(one + "Notebook").Descendants(one + "Section")
+                           select section;
+
             // Transform XML into object collection
-            return from p in doc.Elements(one + "Notebook").Elements().Elements()
+            return from p in sections.Elements()
                    where p.HasAttributes
                    && p.Name.LocalName == "Page"
                    select ParsePage(p, one, true);
@@ -150,12 +158,19 @@ namespace ScipBe.Common.Office.OneNote
             Application oneNote = null;
             try
             {
-                oneNote = new Application();
+                oneNote = Util.TryCatchAndRetry<Application, COMException>(
+                    () => new Application(),
+                    TimeSpan.FromMilliseconds(100),
+                    3,
+                    ex => Trace.TraceError(ex.Message));
                 return action(oneNote);
             }
             finally
             {
-                Marshal.ReleaseComObject(oneNote);
+                if (oneNote != null)
+                {
+                    Marshal.ReleaseComObject(oneNote);
+                }
             }
         }
     }

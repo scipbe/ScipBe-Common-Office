@@ -58,5 +58,13 @@ namespace ScipBe.Common.Office.Tests
             // Arrange
             Assert.IsFalse(string.IsNullOrWhiteSpace(content));
         }
+
+        [TestMethod]
+        public void OpenInOneNote()
+        {
+            // Act
+            var page = OneNoteProvider.PageItems.First();
+            page.OpenInOneNote();
+        }
     }
 }

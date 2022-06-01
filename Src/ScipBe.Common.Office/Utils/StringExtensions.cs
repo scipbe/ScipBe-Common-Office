@@ -15,9 +15,7 @@ namespace ScipBe.Common.Office.Utils
         /// </remarks>
         public static int ToInt32(this string value)
         {
-            int number = 0;
-            Int32.TryParse(value, out number);
-            return number;
+            return int.TryParse(value, out int number) ? number : default;
         }
 
         /// <summary>
@@ -27,20 +25,9 @@ namespace ScipBe.Common.Office.Utils
         /// <returns>System.DateTime.</returns>
         public static DateTime ToDateTime(this string value)
         {
-            if (string.IsNullOrEmpty(value))
-            {
-                return DateTime.MinValue;
-            }
-
-            DateTime dateTime;
-            var success = DateTime.TryParse(value, out dateTime);
-
-            if (!success)
-            {
-                return DateTime.MinValue;
-            }
-
-            return dateTime;
+            return DateTime.TryParse(value, out DateTime dateTime)
+                ? dateTime
+                : DateTime.MinValue;
         }
     }
 }

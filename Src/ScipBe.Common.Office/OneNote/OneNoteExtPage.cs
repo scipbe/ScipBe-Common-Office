@@ -4,8 +4,8 @@ namespace ScipBe.Common.Office.OneNote
 {
     internal class OneNoteExtPage : OneNotePage, IOneNoteExtPage
     {
-        public OneNoteExtPage(Application oneNote)
-            : base(oneNote) { }
+        public OneNoteExtPage()
+            : base() { }
 
         public IOneNoteSection Section { get; set; }
         public IOneNoteNotebook Notebook { get; set; }

@@ -54,6 +54,9 @@
     <Compile Include="..\ScipBe.Common.Office\Utils\StringExtensions.cs">
       <Link>StringExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\ScipBe.Common.Office\Utils\Util.cs">
+      <Link>StringExtensions.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Interop.Microsoft.Office.Interop.OneNote" Version="1.1.0" />
