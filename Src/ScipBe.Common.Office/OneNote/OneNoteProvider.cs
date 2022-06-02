@@ -73,61 +73,62 @@ namespace ScipBe.Common.Office.OneNote
             });
         }
 
-        private static IOneNoteExtNotebook ParseNotebook(XElement element, XNamespace oneNamespace, bool addSections)
+        private static IOneNoteExtNotebook ParseNotebook(XElement notebookElement, XNamespace oneNamespace, bool addSections)
         {
             var notebook = new OneNoteExtNotebook()
             {
-                ID = element.Attribute("ID").Value,
-                Name = element.Attribute("name").Value,
-                NickName = element.Attribute("nickname").Value,
-                Path = element.Attribute("path").Value,
-                Color = element.Attribute("color").Value != "none" ? ColorTranslator.FromHtml(element.Attribute("color").Value) : (Color?)null,
+                ID = notebookElement.Attribute("ID").Value,
+                Name = notebookElement.Attribute("name").Value,
+                NickName = notebookElement.Attribute("nickname").Value,
+                Path = notebookElement.Attribute("path").Value,
+                Color = notebookElement.Attribute("color").Value != "none" ? ColorTranslator.FromHtml(notebookElement.Attribute("color").Value) : (Color?)null,
             };
 
             if (addSections)
             {
-                notebook.Sections = element.Descendants(oneNamespace + "Section").Select(s => ParseSection(s, oneNamespace, true));
+                notebook.Sections = notebookElement.Descendants(oneNamespace + "Section").Select(s => ParseSection(s, oneNamespace, true));
             }
 
             return notebook;
         }
 
-        private static IOneNoteExtSection ParseSection(XElement element, XNamespace oneNamespace, bool addPages)
+        private static IOneNoteExtSection ParseSection(XElement sectionElement, XNamespace oneNamespace, bool addPages)
         {
             var section = new OneNoteExtSection()
             {
-                ID = element.Attribute("ID").Value,
-                Name = element.Attribute("name").Value,
-                Path = element.Attribute("path").Value,
-                Color = element.Attribute("color").Value != "none" ? ColorTranslator.FromHtml(element.Attribute("color").Value) : (Color?)null,
-                Encrypted = (element.Attribute("encrypted") != null) && (element.Attribute("encrypted").Value == "true"),
+                ID = sectionElement.Attribute("ID").Value,
+                Name = sectionElement.Attribute("name").Value,
+                Path = sectionElement.Attribute("path").Value,
+                Color = sectionElement.Attribute("color").Value != "none" ? ColorTranslator.FromHtml(sectionElement.Attribute("color").Value) : (Color?)null,
+                Encrypted = (sectionElement.Attribute("encrypted") != null) && (sectionElement.Attribute("encrypted").Value == "true"),
             };
 
             if (addPages)
             {
-                section.Pages = element.Elements(oneNamespace + "Page").Select(p => ParsePage(p, oneNamespace, false));
+                section.Pages = sectionElement.Elements(oneNamespace + "Page").Select(p => ParsePage(p, oneNamespace, false));
             }
 
             return section;
         }
 
-        private static IOneNoteExtPage ParsePage(XElement element, XNamespace oneNamespace, bool addParents)
+        private static IOneNoteExtPage ParsePage(XElement pageElement, XNamespace oneNamespace, bool addParents)
         {
             var page = new OneNoteExtPage()
             {
-                ID = element.Attribute("ID").Value,
-                Name = element.Attribute("name").Value,
-                Level = element.Attribute("pageLevel").Value.ToInt32(),
-                DateTime = element.Attribute("dateTime").Value.ToString().ToDateTime(),
-                LastModified = element.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
+                ID = pageElement.Attribute("ID").Value,
+                Name = pageElement.Attribute("name").Value,
+                Level = pageElement.Attribute("pageLevel").Value.ToInt32(),
+                DateTime = pageElement.Attribute("dateTime").Value.ToString().ToDateTime(),
+                LastModified = pageElement.Attribute("lastModifiedTime").Value.ToString().ToDateTime(),
             };
 
             if (addParents)
             {
-                page.Section = ParseSection(element.Parent, oneNamespace, false);
+                var sectionElement = pageElement.Parent;
+                page.Section = ParseSection(sectionElement, oneNamespace, false);
 
-                var notebookElement = element.Parent.Parent;
-                if (notebookElement.Name.LocalName == "SectionGroup")
+                var notebookElement = sectionElement.Parent;
+                while (notebookElement.Name.LocalName == "SectionGroup")
                 {
                     notebookElement = notebookElement.Parent;
                 }
