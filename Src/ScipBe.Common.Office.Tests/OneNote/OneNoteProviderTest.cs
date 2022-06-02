@@ -15,7 +15,7 @@ namespace ScipBe.Common.Office.Tests
             var notebooks = OneNoteProvider.NotebookItems;
 
             // Arrange
-            Assert.IsTrue(notebooks.Any());
+            Assert.IsTrue(notebooks.Count() > 0);
         }
 
         [TestMethod]
@@ -25,7 +25,7 @@ namespace ScipBe.Common.Office.Tests
             var pages = OneNoteProvider.PageItems;
 
             // Arrange
-            Assert.IsTrue(pages.Any());
+            Assert.IsTrue(pages.Count() > 0);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace ScipBe.Common.Office.Tests
             var sections = OneNoteProvider.NotebookItems.SelectMany(n => n.Sections);
 
             // Arrange
-            Assert.IsTrue(sections.Any());
+            Assert.IsTrue(sections.Count() > 0);
         }
 
         [TestMethod]
@@ -45,7 +45,7 @@ namespace ScipBe.Common.Office.Tests
             var pages = OneNoteProvider.FindPages("the");
 
             // Arrange
-            Assert.IsTrue(pages.Any());
+            Assert.IsTrue(pages.Count() > 0);
         }
 
         [TestMethod]
