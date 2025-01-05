@@ -1,4 +1,7 @@
-﻿using ScipBe.Common.Office.Excel;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ScipBe.Common.Office.Excel;
+using System;
+using System.Linq;
 
 namespace ScipBe.Common.Office.Tests
 {
@@ -17,6 +20,27 @@ namespace ScipBe.Common.Office.Tests
         {
             var fileName = $@"{AppDomain.CurrentDomain.BaseDirectory}\Excel\Persons.xls";
             LoadFile(fileName, "Persons");
+        }
+
+        [TestMethod]
+        public void LoadCsvSemicolumnFile()
+        {
+            var fileName = $@"{AppDomain.CurrentDomain.BaseDirectory}\Excel\PersonsSemicolumn.csv";
+            LoadFile(fileName);
+        }
+
+        [TestMethod]
+        public void LoadCsvCommaFile()
+        {
+            var fileName = $@"{AppDomain.CurrentDomain.BaseDirectory}\Excel\PersonsComma.csv";
+            LoadFile(fileName);
+        }
+
+        [TestMethod]
+        public void LoadCsvTabFile()
+        {
+            var fileName = $@"{AppDomain.CurrentDomain.BaseDirectory}\Excel\PersonsTab.csv";
+            LoadFile(fileName);
         }
 
         private void LoadFile(string fileName, string workSheetName = null)

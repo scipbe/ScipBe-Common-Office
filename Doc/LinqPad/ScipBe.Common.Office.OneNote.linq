@@ -8,11 +8,6 @@ void Main()
 {
     Util.RawHtml($"<h2>ScipBe.Common.Office.OneNote - LINQ to OneNote - Query Notebooks, Sections and Pages</h2>").Dump();
 	
-    // Find pages containing the word "onenote"
-    OneNoteProvider.FindPages("onenote")
-    .Select(p => new { NotebookName = p.Notebook.Name, SectionName = p.Section.Name, p.Name })
-    .Dump("All OneNote Pages containing the word \"onenote\"");
-    
 	// Show all encrypted OneNote Notebooks
 	var queryEncryptedSections = 
 	from nb in OneNoteProvider.NotebookItems
@@ -31,14 +26,14 @@ void Main()
 	// Show all OneNote Pages which have been modified last few days
 	var queryPages = 
 	from page in OneNoteProvider.PageItems
-	where page.LastModified > DateTime.Now.AddMonths(-2)	
+	where page.LastModified > DateTime.Now.AddDays(-2)	
 	orderby page.LastModified descending
-	select new { NotebookName = page.Notebook.Name, SectionName = page.Section.Name, page.Name, page.LastModified };
-	queryPages.Dump("All OneNote Pages which have been modified last few days");	
-	
+	select page;	
+	queryPages.Dump("All OneNote Pages which have been modified last few days");
+
 	// Show XML content of the OneNote Pages which have been changed the last few days
 	foreach (var item in OneNoteProvider.PageItems.Where(p => p.LastModified > DateTime.Now.AddDays(-2)))
 	{
-        item.GetContent().Dump($"{item.LastModified} {item.Notebook.Name} {item.Section.Name} {item.Name} {item.DateTime}");
-	}		
+		item.GetContent().Dump($"{item.LastModified} {item.Notebook.Name} {item.Section.Name} {item.Name} {item.DateTime}");
+	}
 }

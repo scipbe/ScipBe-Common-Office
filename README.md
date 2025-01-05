@@ -3,7 +3,7 @@
 ### Linq to Excel, Outlook and OneNote
 
 The ScipBe.Common.Office namespace contains 3 classes: ExcelProvider (LINQ to Excel), OutlookProvider (LINQ to Outlook) and OneNoteProvider (LINQ to OneNote). 
-- The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. 
+- The ExcelProvider loads an Excel worksheet and provides column definitions and row collections. 
 - The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). 
 - The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote. 
 - All collections are IEnumerable so you can query them with LINQ. 
@@ -31,21 +31,20 @@ Remarks
 =================================================================
 
 - ExcelProvider
-  - The ExcelProvider supports XLSX (Excel 2007-2016, v12-v16), XLS (Excel 97-2003, v8-v11) and CSV (comma, semicolumn or tab delimited ASCII file) files but it requires the installation of the Microsoft Access Database Engine 2010 Redistributable: https://www.microsoft.com/en-us/download/details.aspx?id=13255
-  - CSV files:
-    - The file name of the CSV file should not contains spaces
-	- The first row of CSV file needs a to contain the column names
-    - The delimiter of the CSV can be specified in the registry at the following location: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Jet\4.0\Engines\Text
-    - Format can be "TabDelimited", "CSVDelimited" or "Delimited(;)"
-    - Or create a schema.ini file in the same folder as the CSV file where you specify the delimiter
-	- See https://msdn.microsoft.com/en-us/library/ms974559.aspx for more information
+  - The ExcelProvider supports XLSX (Excel 2007-2019, v12-v16), XLS (Excel 97-2003, v8-v11) and CSV (comma, semicolumn or tab delimited ASCII file) files but it requires the installation of the Microsoft Access Database Engine 2016 Redistributable: https://www.microsoft.com/en-us/download/details.aspx?id=54920
 
 - OutlookProvider
   - The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly so you have full access to all properties and it also supports adding, updating and deleting data in Outlook.
 
 History
 =================================================================
-- Version 3.0.1 (May 2022)
+- Version 3.1.0 (January 2025)
+  - Switched to Microsoft Access Database Engine 2016 Redistributable for reading Excel XLSX and XLS files
+  - Removed the support for reading CSV files. The CSVHelper library is a much beter alternative: https://joshclose.github.io/CsvHelper/
+  - Updated Microsoft Office Interop nuget package to latest version 15.0.4797.1003
+  - Upgraded unit test project to .NET 8.0 in stead of old .NET 4.6
+  - Updated LinqPad scripts with examples
+- - Version 3.0.1 (May 2022)
   - Fixed some issues around interacting with the OneNote interop library (#13)
 - Version 3.0.0 (May 2022)
   - Migrated to .NET Standard 2.0 to allow .NET Core projects to consume (#8)
