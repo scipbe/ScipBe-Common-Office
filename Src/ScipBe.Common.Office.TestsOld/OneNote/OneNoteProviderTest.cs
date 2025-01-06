@@ -1,4 +1,7 @@
-﻿using ScipBe.Common.Office.OneNote;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
+using ScipBe.Common.Office.OneNote;
 
 namespace ScipBe.Common.Office.Tests
 {

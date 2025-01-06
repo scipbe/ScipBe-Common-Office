@@ -2,18 +2,22 @@
 <package>
   <metadata>
     <id>ScipBe.Common.Office</id>
-    <version>3.0.1</version>
+    <version>3.1.0</version>
     <authors>Stefan Cruysberghs</authors>
-	  <summary>LINQ to Excel, LINQ to Outlook and LINQ to OneNote. Query data of Excel worksheets and CSV files, Outlook Mails, Appointments, Contacts, ... and OneNote Notebooks, Sections and Pages.</summary>
+	<summary>LINQ to Excel, LINQ to Outlook and LINQ to OneNote. Query data of Excel worksheets, Outlook Mails, Appointments, Contacts, ... and OneNote Notebooks, Sections and Pages.</summary>
     <description>The ScipBe.Common.Office namespace contains 3 classes: ExcelProvider (LINQ to Excel), OutlookProvider (LINQ to Outlook) and OneNoteProvider (LINQ to OneNote). The ExcelProvider loads an Excel worksheet or CSV file and provides column definition and row collections. The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote.  All collections are IEnumerable so you can query them with LINQ. There are also 3 separated NuGet packages with for the Excel, Outlook and OneNote provider so they can be used standalone.</description>
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
     <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
     <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.png</iconUrl>
     <releaseNotes>
-      Version 3.0.1 (May 2022)
-      - Fixed some issues around interacting with the OneNote interop library (#13)
-    </releaseNotes>
+		Version 3.1.0 (January 2025)
+		- Switched to Microsoft Access Database Engine 2016 Redistributable for reading Excel XLSX and XLS files
+		- Removed the support for reading CSV files. The CSVHelper library is a much beter alternative: https://joshclose.github.io/CsvHelper/
+		- Updated Microsoft Office Outlook Interop nuget package to latest version 15.0.4797.1003
+		- Upgraded unit test project to .NET 8.0 in stead of old .NET 4.6
+		- Updated LinqPad scripts with examples
+	</releaseNotes>
     <tags>scipbe linq office excel outlook onenote interop</tags>
     <dependencies>
       <dependency id="Interop.Microsoft.Office.Interop.OneNote" version="1.1.0" />

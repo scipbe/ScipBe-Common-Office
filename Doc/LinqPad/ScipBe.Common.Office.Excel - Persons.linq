@@ -9,9 +9,6 @@ void Main()
 
     var excel = new ExcelProvider($@"{Path.GetDirectoryName(Util.CurrentQueryPath)}\Persons.xlsx", "Persons");
     //var excel = new ExcelProvider($@"{Path.GetDirectoryName(Util.CurrentQueryPath)}\Persons.xls", "Persons");
-    //var excel = new ExcelProvider($@"{Path.GetDirectoryName(Util.CurrentQueryPath)}\PersonsTab.csv");
-    //var excel = new ExcelProvider($@"{Path.GetDirectoryName(Util.CurrentQueryPath)}\PersonsComma.csv");
-    //var excel = new ExcelProvider($@"{Path.GetDirectoryName(Util.CurrentQueryPath)}\PersonsSemicolumn.csv");
 
 	excel.Columns.Dump("Columns");
 

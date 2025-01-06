@@ -13,18 +13,18 @@ namespace ScipBe.Common.Office.Excel
     /// <item>Author: Stefan Cruysberghs</item>
     /// <item>Website: http://www.scip.be</item>
     /// <item>Article: Querying Excel worksheets with LINQ : http://www.scip.be/index.php?Page=ArticlesNET25</item>
-    /// <item>Microsoft Access Database Engine 2010 Redistributable: https://www.microsoft.com/en-us/download/details.aspx?id=13255</item>
+    /// <item>Microsoft Access Database Engine 2016 Redistributable: https://www.microsoft.com/en-us/download/details.aspx?id=54920</item>
     /// </list>
     /// </remarks>
     public class ExcelProvider : IExcelProvider
     {
         /// <summary>
-        /// File name of Excel XLSX/XLS or CSV file.
+        /// File name of Excel XLSX or XLS  file.
         /// </summary>
         public string FileName { get; private set; }
 
         /// <summary>
-        /// Type of File: XLSX, XLS or CSV.
+        /// Type of File: XLSX or XLS.
         /// </summary>
         public FileType FileType { get; private set; }
 
@@ -90,7 +90,7 @@ namespace ScipBe.Common.Office.Excel
                 throw new FileNotFoundException($"File {fileName} does not exist");
             }
 
-            if ((FileType != FileType.Csv) && (string.IsNullOrEmpty(sheetName)))
+            if (string.IsNullOrEmpty(sheetName))
             {
                 throw new ArgumentNullException(nameof(sheetName), $"Worksheet name is required for file {fileName}");
             }
@@ -107,8 +107,6 @@ namespace ScipBe.Common.Office.Excel
                     return FileType.Xlsx;
                 case ".XLS":
                     return FileType.Xls;
-                case ".CSV":
-                    return FileType.Csv;
                 default:
                     throw new ArgumentException($"File {FileName} with extension {extension} is not supported");
             }
@@ -119,14 +117,7 @@ namespace ScipBe.Common.Office.Excel
             switch (FileType)
             {
                 case FileType.Xls:
-                    return $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={FileName};Extended Properties=""Excel 8.0;HDR=YES;""";
-                case FileType.Csv:
-                    // https://msdn.microsoft.com/en-us/library/ms974559.aspx
-                    // The delimiter of the CSV can be specified in the registry at the following location: HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Jet\4.0\Engines\Text
-                    // Format can be "TabDelimited", "CSVDelimited" or "Delimited(;)"
-                    // Or create a schema.ini file in the same folder as the CSV file where you specify the delimiter
-                    // "HDR=Yes;" indicates that the first row contains column names, not data. "HDR=No;" indicates the opposite.
-                    return $@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={Path.GetDirectoryName(FileName)};Extended Properties=""text;HDR=Yes;FMT=Delimited;""";
+                    return $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={FileName};Extended Properties=""Excel 8.0;HDR=YES""";
                 default:
                     return $@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source={FileName};Extended Properties=""Excel 12.0 Xml;HDR=YES""";
             }
@@ -134,13 +125,7 @@ namespace ScipBe.Common.Office.Excel
 
         private string GetCommandText()
         {
-            switch (FileType)
-            {
-                case FileType.Csv:
-                    return $"SELECT * FROM {Path.GetFileName(FileName)}";
-                default:
-                    return $"SELECT * FROM [{SheetName}$]";
-            }
+            return $"SELECT * FROM [{SheetName}$]";
         }
 
         private void LoadWorksheet()

@@ -1,5 +1,7 @@
-﻿using Microsoft.Office.Interop.Outlook;
+﻿using System.Linq;
 using ScipBe.Common.Office.Outlook;
+using Microsoft.Office.Interop.Outlook;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ScipBe.Common.Office.Tests
 {
