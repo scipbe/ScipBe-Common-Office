@@ -44,7 +44,7 @@ History
   - Updated Microsoft Office Interop nuget package to latest version 15.0.4797.1003
   - Upgraded unit test project to .NET 8.0 in stead of old .NET 4.6
   - Updated LinqPad scripts with examples
-- - Version 3.0.1 (May 2022)
+- Version 3.0.1 (May 2022)
   - Fixed some issues around interacting with the OneNote interop library (#13)
 - Version 3.0.0 (May 2022)
   - Migrated to .NET Standard 2.0 to allow .NET Core projects to consume (#8)
