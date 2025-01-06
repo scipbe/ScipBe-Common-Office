@@ -8,8 +8,8 @@
     <description>The ExcelProvider loads an Excel worksheet and provides column definitions and row collections. All collections are IEnumerable so you can query them with LINQ. The ExcelProvider supports XLSX (Excel 2007-2019, v12-v16), XLS (Excel 97-2003, v8-v11) but it requires the installation of the Microsoft Access Database Engine 2016 Redistributable.</description>
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
-    <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
-    <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Excel.png</iconUrl>
+	<license type="expression">MIT</license>
+	<icon>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Excel.png</icon>
 	<releaseNotes>
 		Version 3.1.0 (January 2025)
 		- Switched to Microsoft Access Database Engine 2016 Redistributable for reading Excel XLSX and XLS files

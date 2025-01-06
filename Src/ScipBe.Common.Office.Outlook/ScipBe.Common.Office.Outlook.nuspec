@@ -8,8 +8,8 @@
     <description>The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly so you have full access to all properties and it also supports adding, updating and deleting data in Outlook.</description>
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
-    <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
-    <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Outlook.png</iconUrl>
+	<license type="expression">MIT</license>
+	<icon>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Outlook.png</icon>
 	<releaseNotes>
 		Version 3.1.0 (January 2025)
 		- Updated Microsoft Office Outlook Interop nuget package to latest version 15.0.4797.1003

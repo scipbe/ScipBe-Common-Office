@@ -8,8 +8,8 @@
     <description>The OneNoteProvider provides collections of Notebooks, Sections and Pages by parsing the XML hierarchy tree of OneNote.</description>
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
-    <licenseUrl>https://github.com/scipbe/ScipBe-Common-Office/blob/master/LICENSE</licenseUrl>
-    <iconUrl>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.OneNote.png</iconUrl>
+	<license type="expression">MIT</license>
+	<icon>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.OneNote.png</icon>
 	<releaseNotes>
 		Version 3.1.0 (January 2025)
 		- Upgraded unit test project to .NET 8.0 in stead of old .NET 4.6
