@@ -34,7 +34,8 @@ Remarks
   - The ExcelProvider supports XLSX (Excel 2007-2019, v12-v16), XLS (Excel 97-2003, v8-v11) and CSV (comma, semicolumn or tab delimited ASCII file) files but it requires the installation of the Microsoft Access Database Engine 2016 Redistributable: https://www.microsoft.com/en-us/download/details.aspx?id=54920
 
 - OutlookProvider
-  - The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly so you have full access to all properties and it also supports adding, updating and deleting data in Outlook.
+  - The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly so you have full access to all properties and it also supports adding, updating and deleting data in Outlook. 
+  - This component and the COM Interop approach will only work with classic Outlook (2007-2019) on your PC. If you want to use the new Outlook Windows app or the online Outlook of Office365, then you have to use the Microsoft Graph API to access the data.
 
 History
 =================================================================
