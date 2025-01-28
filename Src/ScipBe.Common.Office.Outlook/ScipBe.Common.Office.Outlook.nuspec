@@ -22,7 +22,7 @@
     </dependencies>
   </metadata>
   <files>
-	<file src="bin\Release\netstandard2.0\ScipBe.Common.Office.dll" target="lib\netstandard2.0\ScipBe.Common.Office.dll" />
+	<file src="bin\Release\netstandard2.0\ScipBe.Common.Outlook.dll" target="lib\netstandard2.0\ScipBe.Common.Outlook.dll" />
   </files>
 </package>
 
