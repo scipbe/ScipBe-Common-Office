@@ -20,7 +20,7 @@
     <tags>scipbe linq office excel ado xlsx xls worksheet</tags>
   </metadata>
 	<files>
-		<file src="bin\Release\netstandard2.0\ScipBe.Common.Excel.dll" target="lib\netstandard2.0\ScipBe.Common.Excel.dll" />
+		<file src="bin\Release\netstandard2.0\ScipBe.Common.Office.Excel.dll" target="lib\netstandard2.0\ScipBe.Common.Office.Excel.dll" />
 		<file src="Images\ScipBe.Common.Office.Excel.png" target="Images\ScipBe.Common.Office.Excel.png" />
 	</files>
 </package>
