@@ -26,5 +26,6 @@
   </metadata>
 	<files>
 		<file src="bin\Release\netstandard2.0\ScipBe.Common.Office.dll" target="lib\netstandard2.0\ScipBe.Common.Office.dll" />
+		<file src="Images\ScipBe.Common.Office.png" target="Images\ScipBe.Common.Office.png" />
 	</files>
 </package>
