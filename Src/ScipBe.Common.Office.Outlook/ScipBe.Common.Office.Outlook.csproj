@@ -26,4 +26,12 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1003" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Images\ScipBe.Common.Office.Outlook.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

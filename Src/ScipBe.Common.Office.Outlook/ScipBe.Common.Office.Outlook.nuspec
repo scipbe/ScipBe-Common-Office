@@ -9,7 +9,7 @@
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
 	<license type="expression">MIT</license>
-	<icon>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Outlook.png</icon>
+	<icon>Images\ScipBe.Common.Office.Outlook.png</icon>
 	<releaseNotes>
 		Version 3.1.1 (January 2025)
 		- Updated Microsoft Office Outlook Interop nuget package to latest version 15.0.4797.1003

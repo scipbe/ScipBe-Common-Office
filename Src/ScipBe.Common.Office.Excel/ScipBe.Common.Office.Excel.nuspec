@@ -9,7 +9,7 @@
     <language>en-US</language>
     <projectUrl>https://github.com/scipbe/ScipBe-Common-Office</projectUrl>
 	<license type="expression">MIT</license>
-	<icon>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Excel.png</icon>
+	<icon>Images\ScipBe.Common.Office.Excel.png</icon>
 	<releaseNotes>
 		Version 3.1.1 (January 2025)
 		- Switched to Microsoft Access Database Engine 2016 Redistributable for reading Excel XLSX and XLS files

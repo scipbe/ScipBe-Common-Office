@@ -39,11 +39,17 @@
     <None Update="Class Diagrams\ExcelProvider.cd">
       <SubType>Designer</SubType>
     </None>
+    <None Update="Images\ScipBe.Common.Office.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Interop.Microsoft.Office.Interop.OneNote" Version="1.1.0" />
     <PackageReference Include="Microsoft.Office.Interop.Outlook" Version="15.0.4797.1003" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
 </Project>

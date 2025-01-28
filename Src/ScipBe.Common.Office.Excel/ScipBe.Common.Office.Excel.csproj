@@ -35,4 +35,12 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="System.Data.OleDb" Version="6.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Images\ScipBe.Common.Office.Excel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
