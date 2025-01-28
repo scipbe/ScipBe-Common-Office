@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>ScipBe.Common.Office.Outlook</id>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
     <authors>Stefan Cruysberghs</authors>
 	<summary>LINQ to Outlook. Query Outlook Mails, Appointments, Contacts, ...</summary>
     <description>The OutlookProvider is a wrapper class which provides collections to data of Outlook (AppointmentItems, ContactItems, MailItems, TaskItems, ...). The OutlookProvider exposes collections of classes of the Microsoft.Office.Interop.Outlook assembly so you have full access to all properties and it also supports adding, updating and deleting data in Outlook.</description>
@@ -11,7 +11,7 @@
 	<license type="expression">MIT</license>
 	<icon>https://github.com/scipbe/ScipBe-Common-Office/raw/master/Doc/Images/ScipBe.Common.Office.Outlook.png</icon>
 	<releaseNotes>
-		Version 3.1.0 (January 2025)
+		Version 3.1.1 (January 2025)
 		- Updated Microsoft Office Outlook Interop nuget package to latest version 15.0.4797.1003
 		- Upgraded unit test project to .NET 8.0 in stead of old .NET 4.6
 		- Updated LinqPad scripts with examples
@@ -21,6 +21,9 @@
       <dependency id="Microsoft.Office.Interop.Outlook" version="15.0.4797.1003" />
     </dependencies>
   </metadata>
+  <files>
+	<file src="bin\Release\netstandard2.0\ScipBe.Common.Office.dll" target="lib\netstandard2.0\ScipBe.Common.Office.dll" />
+  </files>
 </package>
 
     
